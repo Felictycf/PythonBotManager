@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.EvenMapper">
+    
+    <resultMap type="Even" id="EvenResult">
+        <result property="id"    column="id"    />
+        <result property="aBeforeUser"    column="a_before_user"    />
+        <result property="aBeforePassword"    column="a_before_password"    />
+        <result property="bBeforeUser"    column="b_before_user"    />
+        <result property="bBeforePassword"    column="b_before_password"    />
+        <result property="evenDate"    column="even_date"    />
+        <result property="aAfterUser"    column="a_after_user"    />
+        <result property="aAfterPassword"    column="a_after_password"    />
+        <result property="bAfterUser"    column="b_after_user"    />
+        <result property="bAfterPassword"    column="b_after_password"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectEvenVo">
+        select id, a_before_user, a_before_password, b_before_user, b_before_password, even_date, a_after_user, a_after_password, b_after_user, b_after_password, status from even
+    </sql>
+
+    <select id="selectEvenList" parameterType="Even" resultMap="EvenResult">
+        <include refid="selectEvenVo"/>
+        <where>  
+            <if test="aBeforeUser != null  and aBeforeUser != ''"> and a_before_user = #{aBeforeUser}</if>
+            <if test="aBeforePassword != null  and aBeforePassword != ''"> and a_before_password = #{aBeforePassword}</if>
+            <if test="bBeforeUser != null  and bBeforeUser != ''"> and b_before_user = #{bBeforeUser}</if>
+            <if test="bBeforePassword != null  and bBeforePassword != ''"> and b_before_password = #{bBeforePassword}</if>
+            <if test="evenDate != null  and evenDate != ''"> and even_date = #{evenDate}</if>
+            <if test="aAfterUser != null  and aAfterUser != ''"> and a_after_user = #{aAfterUser}</if>
+            <if test="aAfterPassword != null  and aAfterPassword != ''"> and a_after_password = #{aAfterPassword}</if>
+            <if test="bAfterUser != null  and bAfterUser != ''"> and b_after_user = #{bAfterUser}</if>
+            <if test="bAfterPassword != null  and bAfterPassword != ''"> and b_after_password = #{bAfterPassword}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectEvenById" parameterType="Long" resultMap="EvenResult">
+        <include refid="selectEvenVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertEven" parameterType="Even" useGeneratedKeys="true" keyProperty="id">
+        insert into even
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="aBeforeUser != null">a_before_user,</if>
+            <if test="aBeforePassword != null">a_before_password,</if>
+            <if test="bBeforeUser != null">b_before_user,</if>
+            <if test="bBeforePassword != null">b_before_password,</if>
+            <if test="evenDate != null">even_date,</if>
+            <if test="aAfterUser != null">a_after_user,</if>
+            <if test="aAfterPassword != null">a_after_password,</if>
+            <if test="bAfterUser != null">b_after_user,</if>
+            <if test="bAfterPassword != null">b_after_password,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="aBeforeUser != null">#{aBeforeUser},</if>
+            <if test="aBeforePassword != null">#{aBeforePassword},</if>
+            <if test="bBeforeUser != null">#{bBeforeUser},</if>
+            <if test="bBeforePassword != null">#{bBeforePassword},</if>
+            <if test="evenDate != null">#{evenDate},</if>
+            <if test="aAfterUser != null">#{aAfterUser},</if>
+            <if test="aAfterPassword != null">#{aAfterPassword},</if>
+            <if test="bAfterUser != null">#{bAfterUser},</if>
+            <if test="bAfterPassword != null">#{bAfterPassword},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEven" parameterType="Even">
+        update even
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="aBeforeUser != null">a_before_user = #{aBeforeUser},</if>
+            <if test="aBeforePassword != null">a_before_password = #{aBeforePassword},</if>
+            <if test="bBeforeUser != null">b_before_user = #{bBeforeUser},</if>
+            <if test="bBeforePassword != null">b_before_password = #{bBeforePassword},</if>
+            <if test="evenDate != null">even_date = #{evenDate},</if>
+            <if test="aAfterUser != null">a_after_user = #{aAfterUser},</if>
+            <if test="aAfterPassword != null">a_after_password = #{aAfterPassword},</if>
+            <if test="bAfterUser != null">b_after_user = #{bAfterUser},</if>
+            <if test="bAfterPassword != null">b_after_password = #{bAfterPassword},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEvenById" parameterType="Long">
+        delete from even where id = #{id}
+    </delete>
+
+    <delete id="deleteEvenByIds" parameterType="String">
+        delete from even where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
