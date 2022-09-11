@@ -1,0 +1,24 @@
+<template>
+    <div class="content">
+      <div class="form">
+        <el-form ref="form" :model="Form" label-width="80px">
+           <el-form-item label="商品名称">
+            <el-input v-model="Form.name"></el-input>
+          </el-form-item>
+          <el-form-item label="商品价格">
+            <el-input v-model="Form.price"></el-input>
+          </el-form-item>
+          <el-form-item label="商品描述">
+            <el-input v-model="Form.description"></el-input>
+          </el-form-item>
+          <el-form-item>
+         </el-form-item>
+         <el-form-item>
+            <el-button type="primary" @click="submit">立即创建</el-button>
+            <el-button>取消</el-button>
+          </el-form-item>
+        </el-form>
+      </div>
+       
+    </div>
+</template>

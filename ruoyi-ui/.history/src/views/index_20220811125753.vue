@@ -5,7 +5,7 @@
 
       <el-form-item prop="aUsername">
         <el-input
-          v-model="indexForm.aUsername"
+          v-model="indexForm.username"
           type="text"
           auto-complete="off"
           placeholder="账号"
@@ -15,10 +15,9 @@
       </el-form-item>
 
 
-
-      <el-form-item prop="aPassword">
+      <el-form-item prop="password">
         <el-input
-          v-model="indexForm.aPassword"
+          v-model="indexForm.password"
           type="password"
           auto-complete="off"
           placeholder="密码"
@@ -28,9 +27,9 @@
       </el-form-item>
 
       <h3>输入b账号和b密码</h3>
-      <el-form-item prop="bUsername">
+      <el-form-item prop="username">
         <el-input
-          v-model="indexForm.bUsername"
+          v-model="indexForm.username"
           type="text"
           auto-complete="off"
           placeholder="账号"
@@ -40,9 +39,9 @@
       </el-form-item>
 
 
-      <el-form-item prop="bPassword">
+      <el-form-item prop="password">
         <el-input
-          v-model="indexForm.bPassword"
+          v-model="indexForm.password"
           type="password"
           auto-complete="off"
           placeholder="密码"
@@ -92,11 +91,9 @@ export default {
       loading: false,
       handleLogin(){
         console.log("ook")
-        console.log("a =>>>>>>"+this.indexForm.aUsername)
-        console.log("a =>>>>>>"+this.indexForm.aPassword)
-        console.log("b =>>>>>>"+this.indexForm.bUsername)
-        console.log("b =>>>>>>"+this.indexForm.bPassword)
-        axios.post("http://129.226.28.6:8881/data",this.indexForm).then(
+        console.log(this.indexForm.username)
+        console.log(this.indexForm.password)
+        axios.post("http://localhost:8000/data",this.indexForm).then(
           function (res){
             alert(res.data)
           }
